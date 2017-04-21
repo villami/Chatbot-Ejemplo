@@ -1,5 +1,5 @@
 var http = require("http");
-const PORT = process.env.port || 3000;
+const PORT = process.env.VCAP_APP_PORT || 3000;
 http.createServer(function (request, response) {
    // Send the HTTP header
    // HTTP Status: 200 : OK
