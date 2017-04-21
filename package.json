@@ -1,0 +1,20 @@
+{
+  "name": "helloworldnode",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bluemixsandbox/helloworldNodeJS.git"
+  },
+  "author": "Horst Josef Grenz Meza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bluemixsandbox/helloworldNodeJS/issues"
+  },
+  "homepage": "https://github.com/bluemixsandbox/helloworldNodeJS#readme"
+}
