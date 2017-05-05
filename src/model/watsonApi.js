@@ -4,7 +4,6 @@ var cfenv = require('cfenv');
 var _ = require('lodash');
 var appenv= cfenv.getAppEnv();
 var creds = appenv.getServiceCreds("Tone Analyzer-WatsonDemo");
-console.log(creds);
 var watsonAPI = (function(){
   var tone_analyzer = new ToneAnalyzerV3({
     'username': creds.username,
