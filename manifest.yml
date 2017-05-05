@@ -1,0 +1,11 @@
+---
+applications:
+- disk_quota: 1024M
+  buildpack: nodejs_buildpack
+  host: hellowatson
+  name: helloWatsonToneDemo
+  command: node app.js
+  path: .
+  domain: mybluemix.net
+  instances: 1
+  memory: 1024M

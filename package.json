@@ -2,10 +2,10 @@
   "name": "helloworldnode",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,15 @@
   "bugs": {
     "url": "https://github.com/bluemixsandbox/helloworldNodeJS/issues"
   },
-  "homepage": "https://github.com/bluemixsandbox/helloworldNodeJS#readme"
+  "homepage": "https://github.com/bluemixsandbox/helloworldNodeJS#readme",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "cfenv": "^1.0.4",
+    "ejs": "^2.5.1",
+    "express": "^4.14.0",
+    "lodash": "^4.17.4",
+    "promise": "^7.1.1",
+    "querystring": "^0.2.0",
+    "watson-developer-cloud": "^2.15.5"
+  }
 }
