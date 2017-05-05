@@ -5,11 +5,9 @@ var apiRouter = express.Router();
 apiRouter.route('/tone')
     .post(function(req, res) {
         console.log(req.body.text);
-        watsonAPI.getSocialTone(req.body.text).then(function(tone) {
-            console.log('Tone:' + tone.tone_name);
-            console.log('Using color:' + color);
-            res.write(tone.tone_name);
-            res.end();
+        watsonAPI.getAllEmotionTones(req.body.text).then(function(tones) {
+            console.log(tones);
+            res.status(200).send(tones);
         });
     });
 module.exports = apiRouter;
