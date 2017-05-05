@@ -2,11 +2,13 @@ var Promise = require('promise');
 var ToneAnalyzerV3 = require('watson-developer-cloud/tone-analyzer/v3');
 var cfenv = require('cfenv');
 var _ = require('lodash');
-
+var appenv= cfenv.getAppEnv();
+var creds = appenv.getServiceCreds("Tone Analyzer-WatsonDemo");
+console.log(creds);
 var watsonAPI = (function(){
   var tone_analyzer = new ToneAnalyzerV3({
-    'username': '',
-    'password': '',
+    'username': creds.username,
+    'password': creds.password,
     'version_date': '2016-05-19'
   });
   var getSocialTone = function(text){
