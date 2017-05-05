@@ -4,8 +4,8 @@ var apiRouter = express.Router();
 
 apiRouter.route('/tone')
     .post(function(req, res) {
-        console.log(req.body);
-        watsonAPI.getSocialTone(req.body).then(function(tone) {
+        console.log(req.body.text);
+        watsonAPI.getSocialTone(req.body.text).then(function(tone) {
             console.log('Tone:' + tone.tone_name);
             console.log('Using color:' + color);
             res.write(tone.tone_name);
