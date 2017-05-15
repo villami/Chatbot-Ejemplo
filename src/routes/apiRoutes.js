@@ -10,4 +10,12 @@ apiRouter.route('/tone')
             res.status(200).send(tones);
         });
     });
+apiRouter.route('/analyze')
+    .post(function(req,res){
+        console.log(req.body);
+        watsonAPI.getAllEmotionTones(req.body.text).then(function(tones) {
+            console.log(tones);
+            res.status(200).send(tones);
+        });
+    });
 module.exports = apiRouter;

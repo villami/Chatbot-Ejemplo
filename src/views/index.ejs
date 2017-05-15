@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <!-- bower:css -->
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css" />
+    <!-- endbower -->
+    <script type='text/javascript' src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type='text/javascript' src="/bower_components/angular/angular.min.js"></script>
+</head>
+
+<body ng-app="watsondemo">
+    <% include partials/navbar %>
+    <div class="container-fluid" ng-controller="charts">
+        <div class="row">
+            <!-- CAROUSEL -->
+            <div class="col-lg-6">
+              <form>
+                <div class="form-group">
+                  <label for="text">Name</label>
+                  <textarea ng-model="inputText" id="text"name="text" class="form-control" placeholder="Ingrese el texto a analizar">
+                    <%=text%>
+                  </textarea>
+                </div>
+                <label>{{inputText.length||0}} char(s)</label>
+                <button class="btn btn-default" type="submit" ng-click="analyze()">Analizar</button>
+                <i ng-show="analyzing"class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+              </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-5">
+              <canvas id="radar" class="chart chart-radar"
+                height="100"
+                width="100"
+                chart-data="data" chart-options="options" chart-labels="labels">
+              </canvas>
+            </div>
+            <div class="col-lg-7">
+              <table class="table table-striped">
+                <thead>
+                  <tr><th>Emotion</th><th>Score</th></tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="row in tones">
+                    <td>{{row.tone_name}}</td>
+                    <td>{{row.score}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+        </div>
+        <!-- bower:js -->
+        <script  type='text/javascript'src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script  type='text/javascript'src="/bower_components/chart.js/dist/Chart.min.js"></script>
+        <script  type='text/javascript'src="/bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
+        <!-- endbower -->
+        <!-- inject:js -->
+        <script defer >
+        (function(){
+          var app = angular.module('watsondemo',['chart.js']);
+            app.controller('charts',['$scope','$http',function($scope,$http){
+              console.log('hello');
+              $scope.analyzing = false;
+              $scope.analyze = function(){
+                $scope.inputText = $scope.inputText.trim();
+                $scope.analyzing = true;
+                $http.post('/api/analyze',{text:$scope.inputText}).then(function(res){
+                  console.log(res);
+                  var tones = res.data;
+                  console.log(tones);
+                  var tmp = new Array();
+                  var labels = new Array();
+                  for(var i in tones.tones){
+                    tmp.push(tones.tones[i].score*100);
+                    labels.push(tones.tones[i].tone_name);
+                  }
+                  $scope.tones = tones.tones;
+                  $scope.data = tmp;
+                  $scope.labels = labels;
+                  $scope.analyzing = false;
+                });
+              }
+            }]);
+        })();
+
+        </script>
+        <!-- endinject -->
+</body>
+
+</html>

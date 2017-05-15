@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var cfenv = require('cfenv');
+var watsonAPI = require('./src/model/watsonApi.js');
 var app = express();
 
 var port = process.env.PORT || 5000;
@@ -20,6 +21,12 @@ app.get('/',function(req,res){
     console.log(appenv);
     console.log(appenv.getServiceCreds("Tone Analyzer-WatsonDemo"));
     res.send('Hello World');
+});
+app.get('/ui',function(req,res){
+  res.render('index', {
+      'text': '',
+      'tones': [],
+  });
 });
 app.listen(port, function(err){
    console.log('running on server on port:'+port);
